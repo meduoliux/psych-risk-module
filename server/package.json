@@ -3,14 +3,21 @@
   "version": "1.0.0",
   "type": "module",
   "main": "server.js",
+  "description": "Psych risk backend",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build-better-sqlite3": "npm rebuild better-sqlite3 --build-from-source",
+    "postinstall": "npm run build-better-sqlite3"
+  },
+  "engines": {
+    "node": "20.x"
   },
   "dependencies": {
     "better-sqlite3": "^12.4.1",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "nanoid": "^5.1.6"
+    "nanoid": "^5.1.6",
+    "router": "^2.0.0"
   }
 }
