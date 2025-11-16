@@ -1,0 +1,153 @@
+:root{
+  --pk-navy:#ffffff;
+  --pk-blue:#0a6cf1;
+  --pk-text:#f1f3f5;
+  --pk-muted:#6b7280;
+  --pk-border:#d6deea;
+}
+
+/* Header’as */
+.pkh{
+  background:#fff;
+  border-bottom:1px solid var(--pk-border);
+}
+.pkh__inner{
+  max-width:1200px;
+  margin:0 auto;
+  padding:10px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+
+/* Brand (kairė) */
+.pkh__brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+}
+.pkh__logo{
+  display:block;
+  height:40px;
+  width:auto;
+}
+.pkh__brand-text{
+  font-weight:800;
+  letter-spacing:.5px;
+  color:var(--pk-navy);
+  font-size:22px;
+  line-height:1;
+  white-space:nowrap;
+}
+
+/* Dešinė pusė */
+.pkh__right{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+/* Telefonas (tik ikonėlė) */
+.pkh__phone{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:36px;
+  height:36px;
+  color:#7a8aa3;
+  border:1px solid #d9e2f2;
+  border-radius:50%;
+  text-decoration:none;
+  transition:filter .15s ease, background .15s ease;
+}
+.pkh__phone:hover{
+  background:#f3f6fb;
+  filter:brightness(.95);
+}
+.pkh__phone-ic{
+  display:block;
+}
+
+/* „Prisijungimas“ mygtukas – kaip PK */
+.pkh__login{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:44px;
+  padding:0 22px;
+  border-radius:10px;
+  border:1px solid #d7deea;
+  color:#7a8aa3;
+  background:#fff;
+  text-decoration:none;
+  font-weight:700;
+  letter-spacing:.2px;
+  transition:background .15s ease, color .15s ease, border-color .15s ease, transform .03s;
+}
+.pkh__login:hover{
+  background:#f6f8fc;
+  border-color:#cfd8e9;
+  color:#637694;
+}
+.pkh__login:active{ transform:translateY(1px); }
+
+/* „Hamburgerio“ nėra – specialiai jo nenaudojame */
+
+/* Responsyviai – mažink tarpus */
+@media (max-width: 640px){
+  .pkh__brand-text{ display:none; } /* paliekam tik logotipą */
+  .pkh__inner{ padding:10px 12px; }
+  .pkh__login{ height:40px; padding:0 16px; }
+}
+
+:root{ --pk-navy:#edeff3; --pk-blue:#0a6cf1; --pk-text:#f7f7f7; --pk-muted:#6b7280; --pk-border:#d6deea; }
+.pkh{ background:#0f2c56; border-bottom:1px solid var(--pk-border); }
+.pkh__inner{ max-width:1200px; margin:0 auto; padding:10px 16px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+.pkh__brand{ display:flex; align-items:center; gap:12px; text-decoration:none; }
+.pkh__logo{ display:block; height:40px; width:auto; }
+.pkh__brand-text{ font-weight:800; letter-spacing:.5px; color:#eaeef2; font-size:22px; line-height:1; white-space:nowrap; }
+.pkh__right{ display:flex; align-items:center; gap:18px; }
+.pkh__phone{ display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; color:#7a8aa3; border:1px solid #d9e2f2; border-radius:50%; text-decoration:none; transition:filter .15s, background .15s; }
+.pkh__phone:hover{ background:#f3f6fb; filter:brightness(.95); }
+.pkh__login{ display:inline-flex; align-items:center; justify-content:center; height:44px; padding:0 22px; border-radius:10px; border:1px solid #d7deea; color:#7a8aa3; background:#fff; text-decoration:none; font-weight:700; letter-spacing:.2px; transition:background .15s, color .15s, border-color .15s, transform .03s; }
+.pkh__login:hover{ background:#f6f8fc; border-color:#cfd8e9; color:#637694; }
+.pkh__login:active{ transform:translateY(1px); }
+@media (max-width:640px){ .pkh__brand-text{ display:none; } .pkh__inner{ padding:10px 12px; } .pkh__login{ height:40px; padding:0 16px; } }
+
+
+/* Kad <button class="pkh__login"> atrodytų taip pat, kaip <a class="pkh__login"> */
+button.pkh__login {
+  all: unset; /* nuimam visus default button stilius */
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 22px;
+  border-radius: 10px;
+  border: 1px solid #d7deea;
+  color: #7a8aa3;
+  background: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: .2px;
+  cursor: pointer;
+  transition:
+    background .15s ease,
+    color .15s ease,
+    border-color .15s ease,
+    transform .03s;
+}
+
+/* Hover/active tokie patys kaip linkui */
+button.pkh__login:hover {
+  background: #f6f8fc;
+  border-color: #cfd8e9;
+  color: #637694;
+}
+
+button.pkh__login:active {
+  transform: translateY(1px);
+}

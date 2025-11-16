@@ -1,62 +1,85 @@
-import React, { useState } from "react";
-import { Routes, Route, Navigate, Link, useNavigate } from "react-router-dom";
-import Admin from "./pages/Admin.jsx";
+// client/src/App.jsx
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import PkFooter from "./components/PkFooter.jsx";
+import Register from "./pages/Register.jsx";
+
 import Login from "./pages/Login.jsx";
-import Questionnaire from "./pages/Questionnaire.jsx";
+import Admin from "./pages/Admin.jsx";
+import Manager from "./pages/Manager.jsx";
+import Survey from "./pages/Survey.jsx";
 import Result from "./pages/Result.jsx";
+import Contacts from "./pages/Contacts.jsx";
+import ForgotPassword from "./pages/ForgotPassword.jsx"; // ⬅️ NAUJA
 
-export default function App() {
-  const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem("token"));
-  const navigate = useNavigate();
+import PkHeader from "./components/PkHeader.jsx";
 
-  function handleLogin() {
-    setLoggedIn(true);
-    navigate("/admin"); // 👈 iškart po prisijungimo nukreipia
-  }
+function RequireAuth({ children, role }) {
+  const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  if (!token) return <Navigate to="/login" replace />;
+  if (role && user.role !== role) return <Navigate to="/" replace />;
+  return children;
+}
 
-  function handleLogout() {
-    localStorage.removeItem("token");
-    setLoggedIn(false);
-    navigate("/login"); // 👈 iškart nukreipia atgal į login
-  }
+function HomeRedirect() {
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  if (user.role === "admin") return <Navigate to="/admin" replace />;
+  if (user.role === "manager") return <Navigate to="/manager" replace />;
+  return <Navigate to="/login" replace />;
+}
+
+function ProtectedLayout({ children }) {
+  const user = JSON.parse(localStorage.getItem("user") || "null");
 
   return (
-    <div style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}>
-      <header style={{ display: "flex", justifyContent: "space-between" }}>
-        <h2>Psichometrinis kredito rizikos modulis</h2>
-        <nav>
-          <Link to="/">Pradžia</Link>
-        </nav>
-      </header>
+    <div className="app-shell">
+      {user ? <PkHeader user={user} /> : null}
 
-      <Routes>
-        {/* Prisijungimo puslapis */}
-        <Route path="/login" element={<Login onLogin={handleLogin} />} />
+      <main className="app-main">
+        {children}
+      </main>
 
-        {/* Administratoriaus puslapis (apsaugotas) */}
-        <Route
-          path="/admin"
-          element={
-            loggedIn ? (
-              <Admin onLogout={handleLogout} />
-            ) : (
-              <Navigate to="/login" replace />
-            )
-          }
-        />
-
-        {/* Kliento klausimynas */}
-        <Route path="/q/:token" element={<Questionnaire />} />
-
-        {/* Rezultato puslapis */}
-        <Route path="/done" element={<Result />} />
-
-        {/* Numatytas kelias */}
-        <Route
-          path="*"
-          element={<Navigate to={loggedIn ? "/admin" : "/login"} replace />}
-        />
-      </Routes>
+      <PkFooter className="app-footer" />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomeRedirect />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+
+      <Route path="/contacts" element={<Contacts />} />
+
+      <Route
+        path="/admin"
+        element={
+          <RequireAuth role="admin">
+            <ProtectedLayout>
+              <Admin />
+            </ProtectedLayout>
+          </RequireAuth>
+        }
+      />
+
+      <Route
+        path="/manager"
+        element={
+          <RequireAuth role="manager">
+            <ProtectedLayout>
+              <Manager />
+            </ProtectedLayout>
+          </RequireAuth>
+        }
+      />
+
+      <Route path="/q/:token" element={<Survey />} />
+      <Route path="/result" element={<Result />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="*" element={<div style={{ padding: 40 }}>404</div>} />
+    </Routes>
   );
 }

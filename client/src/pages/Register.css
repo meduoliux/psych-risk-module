@@ -1,0 +1,231 @@
+/* =========================================================
+   Register puslapio UI (pilnas failas)
+   ========================================================= */
+
+/* Tema / kintamieji */
+:root {
+  --pk-bg:        #f4f6fb;
+  --pk-text:      #101828;
+  --pk-muted:     #6b7280;
+  --pk-border:    #e5e7eb;
+  --pk-primary:   #2563eb;
+  --pk-primary-2: #1d4ed8;
+  --pk-card:      #ffffff;
+
+  --pk-radius: 14px;
+  --pk-shadow: 0 12px 36px rgba(16, 24, 40, 0.08);
+}
+
+/* Reset / bazė */
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+  color: var(--pk-text);
+  background: var(--pk-bg);
+}
+
+/* Sticky footer karkasas */
+.pk-shell {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+.pk-main{
+  flex: 1;
+  display: flex;
+  align-items: center;     /* vertikaliai */
+  justify-content: center; /* horizontaliai */
+  padding: 48px 16px;
+}
+.pk-shell > .pk-footer {
+  margin-top: auto;
+}
+
+/* Konteineris (bendras) */
+.pk-container {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ============ REGISTER KORTELĖ ============ */
+.pk-auth-card {
+  width: 100%;
+  max-width: 640px;                 /* truputį platesnė nei login */
+  background: var(--pk-card);
+  border: 1px solid var(--pk-border);
+  border-radius: var(--pk-radius);
+  box-shadow: var(--pk-shadow);
+  padding: 28px 28px 22px;
+}
+
+.pk-auth-title {
+  margin: 0 0 18px 0;
+  font-size: 26px;
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: .2px;
+  color: #0f172a;
+}
+
+/* Forma */
+.pk-form { margin-top: 2px; }
+.pk-field { margin: 12px 0; }
+
+.pk-input {
+  width: 100%;
+  height: 48px;
+  padding: 12px 14px;
+  border: 1px solid var(--pk-border);
+  border-radius: 10px;
+  background: #fff;
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+  color: var(--pk-text);
+}
+.pk-input::placeholder { color: #9aa4b2; }
+.pk-input:focus {
+  border-color: #c7d2fe;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, .12);
+}
+
+/* Dviejų kolonų maketas Vardas/Pavardė platesniuose ekranuose */
+.pk-two {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+@media (min-width: 560px) {
+  .pk-two { grid-template-columns: 1fr 1fr; }
+}
+
+/* Mygtukas */
+.pk-primary-btn {
+  width: 100%;
+  height: 48px;
+  padding: 0 18px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: var(--pk-primary);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .03s ease-in-out, opacity .2s, background .15s;
+}
+.pk-primary-btn:hover { background: var(--pk-primary-2); }
+.pk-primary-btn:active { transform: translateY(1px); }
+.pk-primary-btn:disabled { opacity: .7; cursor: not-allowed; }
+
+/* Žinutės */
+.pk-error {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #dc2626;       /* per JSX gali pakeisti į mėlyną, kai ok=true */
+}
+
+/* Nuorodos (jei reikės) */
+.pk-link {
+  color: var(--pk-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+.pk-link:hover { text-decoration: underline; }
+
+/* Mažesni ekranai */
+@media (max-width: 480px) {
+  .pk-auth-card { padding: 22px 18px 18px; }
+  .pk-auth-title { font-size: 22px; }
+}
+
+/* 1) Kortelę padidinam – bus daugiau vietos laukams */
+.pk-auth-card{
+  max-width: 760px;   /* buvo 420/640 – padidinam */
+  width: 100%;
+}
+
+/* 2) Laukelius padarom aukštesnius ir vizualiai didesnius */
+.pk-input{
+  width: 100%;
+  max-width: 100%;
+  padding: 16px 18px;   /* buvo ~12px – padidinam aukštį */
+  font-size: 16px;      /* didesnis šriftas */
+  line-height: 1.35;
+}
+
+/* 3) Kad jokie tėvai „nesusiaurintų“ laukų */
+.pk-form, .pk-field{
+  width: 100%;
+  max-width: 100%;
+}
+
+/* (nebūtina) jei šalia mygtukų viskas atrodo ankšta */
+.pk-primary-btn{
+  padding: 14px 18px;
+  font-size: 16px;
+}
+
+/* Platesnė kortelė */
+.pk-auth-card{
+  width: 100%;
+  max-width: 880px;      /* <-- padidink iki 880–960px pagal skonį */
+  margin: 0 auto;        /* centre */
+  padding: 32px 28px;    /* šiek tiek daugiau oro */
+}
+
+/* Kad aplinkiniai stiliai neapribotų pločio */
+.pk-container, .pk-form, .pk-field{
+  width: 100%;
+  max-width: 100%;
+}
+
+/* (nebūtina) jei nori dar daugiau – naudok viso ekrano pločio ribą */
+@media (min-width: 1200px){
+  .pk-auth-card{ max-width: 960px; }
+}
+
+/* ===========================
+   Registracijos žingsnių UI
+   =========================== */
+
+/* „breadcrumbs“ viršuje */
+.pk-steps {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--pk-muted, #6b7280);
+  margin-bottom: 16px;
+}
+
+.pk-step {
+  color: #9ca3af;
+}
+
+.pk-step--active {
+  font-weight: 700;
+  color: var(--pk-navy-2, #182a46);
+}
+
+.pk-step-sep {
+  color: #d1d5db;
+}
+
+/* Paaiškinimas prie kodo įvedimo */
+.pk-register-caption {
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: var(--pk-muted, #6b7280);
+}
+
+/* Mygtukas, kad nebūtų „prilipęs“ prie kraštų */
+.pk-register-actions {
+  margin-top: 4px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* Jei naudoji pk-btn login puslapyje – pritaikom ir čia */
+.pk-register-actions .pk-btn {
+  min-width: 220px;
+}

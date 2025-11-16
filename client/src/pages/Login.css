@@ -1,0 +1,226 @@
+/* ===========================
+   Login – izoliuotas skin tik šiam puslapiui
+   =========================== */
+:root{
+  --pk-navy:#142238;
+  --pk-navy-2:#182A46;
+  --pk-blue:#0a6cf1;
+  --pk-blue-300:#4a90ff;
+  --pk-bg:#f7f8fb;
+  --pk-text:#1f2937;
+  --pk-muted:#6b7280;
+  --pk-border:#e5e7eb;
+  --pk-radius:16px;
+  --pk-shadow:0 16px 40px rgba(10,20,40,.12);
+}
+
+/* Centras visam login puslapiui */
+.pk-main{
+  min-height:calc(100vh - 140px);   /* palieka vietos header+footer */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:64px 16px 80px;
+  background:var(--pk-bg);
+  color:var(--pk-text);
+}
+
+/* Platesnė kortelė */
+.pk-auth-card{
+  width:100%;
+  max-width:860px;                  /* <<< didesnė kortelė */
+  margin:0 auto;
+  background:#fff;
+  border:1px solid var(--pk-border);
+  border-radius:var(--pk-radius);
+  box-shadow:var(--pk-shadow);
+  padding:32px 32px 24px;
+}
+
+/* Antraštė */
+.pk-auth-title{
+  margin:0 0 10px;
+  font-size:24px;
+  line-height:1.25;
+  font-weight:800;
+  color:var(--pk-navy-2);
+}
+
+/* Forma */
+.pk-form{ margin-top:8px; }
+.pk-field + .pk-field{ margin-top:14px; }
+
+.pk-input{
+  width:100%;
+  padding:14px 16px;                /* aukštesni laukai */
+  border:1px solid var(--pk-border);
+  border-radius:12px;
+  background:#fff;
+  outline:none;
+  transition:border-color .15s, box-shadow .15s;
+  color:var(--pk-text);
+  font-size:15px;
+}
+.pk-input::placeholder{ color:#9aa3b2; }
+.pk-input:focus{
+  border-color:#c7d2fe;
+  box-shadow:0 0 0 4px rgba(10,108,241,.10);
+}
+
+/* Veiksmų juosta */
+.pk-actions{
+  margin-top:16px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+/* BENDRAS mygtukų stilius – abiem vienodas dydis/formą */
+.pk-btn{
+  min-width:190px;                  /* abu identiško pločio */
+  padding:13px 20px;
+  border-radius:12px;
+  font-weight:700;
+  cursor:pointer;
+  transition:transform .03s ease-in-out, box-shadow .18s, border-color .15s, color .15s, opacity .2s;
+}
+
+/* Pirminis */
+.pk-btn--primary{
+  border:0;
+  background:var(--pk-blue);
+  color:#fff;
+}
+.pk-btn--primary:hover{ box-shadow:0 8px 18px rgba(10,108,241,.28); }
+.pk-btn--primary:active{ transform:translateY(1px); }
+.pk-btn--primary:disabled{ opacity:.7; cursor:not-allowed; }
+
+/* Kontūrinis – IDENTIŠKAS dydžiu ir kampais */
+/* Kontūrinis – aiškiai matomas ir be hover */
+/* Kontūrinis – aiškiai matomas ir be hover */
+.pk-btn--outline{
+  border: 1px solid #cbd5e1;       /* ryškesnis rėmelis */
+  background: #f9fafb;             /* šviesiai pilkas fonas, kad matytųsi mygtukas */
+  color: var(--pk-navy-2);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);  /* labai lengvas šešėlis */
+}
+
+.pk-btn--outline:hover{
+  border-color: var(--pk-blue-300);
+  background: #eef2ff;             /* truputį mėlynesnis fonas užvedus */
+  color: var(--pk-blue);
+  box-shadow: 0 6px 16px rgba(10,108,241,.12);
+}
+
+/* Separatorius „arba“ */
+.pk-sep{
+  font-size:13px;
+  color:var(--pk-muted);
+  user-select:none;
+}
+
+/* Nuoroda „Pamiršai slaptažodį?“ dešinėje */
+.pk-auth__footer{
+  margin-top:12px;
+  display:flex;
+  justify-content:flex-end;
+}
+.pk-link{
+  color:var(--pk-blue);
+  text-decoration:none;
+  font-weight:600;
+}
+.pk-link:hover{ text-decoration:underline; }
+
+/* Klaida */
+.pk-error{
+  margin-top:10px;
+  color:#dc2626;
+  font-size:14px;
+}
+
+/* Responsive */
+@media (max-width:640px){
+  .pk-main{ padding:40px 12px 64px; }
+  .pk-auth-card{ max-width:95%; padding:24px 20px; }
+  .pk-actions{ gap:10px; }
+  .pk-btn{ min-width:unset; width:100%; }
+}
+
+/* Login puslapio specifinis outline mygtukas */
+.pk-auth-card .pk-btn--outline {
+  border: 1px solid #cbd5e1 !important;
+  background: #f9fafb !important;   /* kad nebūtų baltas */
+  color: var(--pk-navy-2) !important;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+}
+
+/* Hover būsena – dar truputį ryškesnė */
+.pk-auth-card .pk-btn--outline:hover {
+  border-color: var(--pk-blue-300) !important;
+  background: #eef2ff !important;
+  color: var(--pk-blue) !important;
+  box-shadow: 0 6px 16px rgba(10,108,241,.12);
+}
+
+/* Specialus mygtukų blokas 2 žingsnyje (kodo tikrinimas) */
+.pk-fp-actions {
+  gap: 12px;             /* tarpas tarp mygtukų */
+  margin-top: 16px;
+  margin-bottom: 24px;   /* <-- tarpas iki teksto/žinučių apačioje */
+}
+/* Informacinė žinutė (pvz. „Kodas patvirtintas…“) */
+.pk-info{
+  margin-top: 14px;      /* tarpas nuo mygtukų */
+  margin-bottom: 4px;    /* jei po apačia dar kas nors bus */
+  color: #0a6cf1;        /* švelniai mėlyna, kad skirtųsi nuo error */
+  font-size: 14px;
+}
+/* Informacinė žinutė (naudojama 1–3 step'uose) */
+.pk-info {
+  margin-top: 18px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #eff6ff;      /* švelniai mėlynas fonas */
+  color: #1d4ed8;
+  font-size: 14px;
+}
+
+/* Paskutinio žingsnio (sėkmės) blokas */
+.pk-success-block {
+  margin-top: 12px;
+  padding: 28px 24px 30px;
+  border-radius: 14px;
+  background: #ecfdf5;      /* švelniai žalias fonas */
+  border: 1px solid #bbf7d0;
+  text-align: center;
+}
+
+/* Žalias „check“ burbulas */
+.pk-success-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: #22c55e;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 auto 14px;
+  box-shadow: 0 10px 24px rgba(34, 197, 94, 0.35);
+}
+
+/* Tekstas po ikonos */
+.pk-success-text {
+  margin: 0 0 20px;
+  font-size: 15px;
+  color: #166534;
+}
+
+/* Kad mygtukas atrodytų solidžiau šiame bloke */
+.pk-success-block .pk-btn {
+  min-width: 220px;
+}

@@ -1,47 +1,130 @@
-// Naudojame Vite ENV kintamąjį API bazei
-const API_BASE = import.meta.env.VITE_API_URL || "/api";
+// client/src/api/api.js
+const BASE = import.meta.env.VITE_API_URL || "/api";
 
-function authHeader() {
-  const t = localStorage.getItem("token");
-  return t ? { Authorization: `Bearer ${t}` } : {};
+const API_BASE = import.meta.env.DEV
+  ? "http://localhost:3001"
+  : import.meta.env.VITE_API_BASE;
+
+async function handle(res) {
+  if (!res.ok) {
+    let msg = "";
+    try { msg = await res.text(); } catch {}
+    // pabandyk paimti JSON error
+    try {
+      const j = JSON.parse(msg);
+      if (j?.error) throw new Error(j.error);
+    } catch { /* ignore */ }
+    throw new Error(msg || `HTTP ${res.status}`);
+  }
+  return res.json();
 }
 
-export async function fetchQuestions() {
-  const r = await fetch(`${API_BASE}/questions`);
-  if (!r.ok) throw new Error("Nepavyko gauti klausimų");
-  return r.json();
+export function apiGet(path) {
+  return fetch(BASE + path, {
+    headers: { "Content-Type": "application/json" },
+  }).then(handle);
 }
 
-export async function createInvite(ttlMinutes, personal_code) {
-  const r = await fetch(`${API_BASE}/admin/invite`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", ...authHeader() },
-    body: JSON.stringify({ ttlMinutes, personal_code }),
-  });
-  if (!r.ok) throw new Error((await r.json()).error || "Nepavyko sukurti nuorodos");
-  return r.json();
-}
-
-export async function listResults() {
-  const r = await fetch(`${API_BASE}/admin/results`, {
-    headers: { ...authHeader() },
-  });
-  if (!r.ok) throw new Error("Nepavyko gauti rezultatų");
-  return r.json();
-}
-
-export async function fetchInvite(token) {
-  const r = await fetch(`${API_BASE}/invite/${token}`);
-  if (!r.ok) throw new Error((await r.json()).error || "Nuoroda negalioja");
-  return r.json();
-}
-
-export async function submitAnswers(token, answers) {
-  const r = await fetch(`${API_BASE}/submit`, {
+export function apiPost(path, body) {
+  return fetch(BASE + path, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ token, answers }),
+    body: JSON.stringify(body),
+  }).then(handle);
+}
+
+export function apiPut(path, body) {
+  return fetch(BASE + path, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  }).then(handle);
+}
+
+export function apiDelete(path) {
+  return fetch(BASE + path, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  }).then(handle);
+}
+
+/* =========================
+   Auth
+   ========================= */
+export function login(username, password) {
+  return apiPost("/login", { username, password });
+}
+
+/* =========================
+   Kvietimai / Rezultatai
+   ========================= */
+export function createInvite(payload) {
+  return apiPost("/admin/invite", payload);
+}
+
+export function listResults() {
+  return apiGet("/admin/results");
+}
+
+export function resendInvite(token) {
+  return apiPost(`/admin/invite/${encodeURIComponent(token)}/resend`, {});
+}
+
+/* Vieša dalis (klientui) */
+export function fetchQuestions() {
+  return apiGet("/questions");
+}
+
+export function checkInvite(token) {
+  return apiGet(`/invite/${encodeURIComponent(token)}`);
+}
+
+export function submitAnswers(token, answers) {
+  return apiPost(`/submit`, { token, answers });
+}
+
+export function getResults() {
+  return apiGet("/admin/results");
+}
+
+export function getResultDetail(token) {
+  return apiGet(`/admin/results/${encodeURIComponent(token)}`);
+}
+
+/* =========================
+   Admin/Registracijos
+   ========================= */
+// status gali būti: "pending" | "approved" | "rejected" | undefined (visos)
+export function listRegistrations(status) {
+  const q = status ? `?status=${encodeURIComponent(status)}` : "";
+  return apiGet(`/admin/registrations${q}`);
+}
+
+export function approveRegistration(id) {
+  return apiPost(`/admin/registrations/${id}/approve`, {});
+}
+
+// „Atmesti“ – naudojam DELETE, bet backend pažymi 'rejected'
+export function rejectRegistration(id) {
+  return apiDelete(`/admin/registrations/${id}`);
+}
+
+/* =========================
+   Slaptažodžio atstatymas
+   ========================= */
+export function requestPasswordReset(email) {
+  return apiPost("/auth/password-reset/request", { email });
+}
+
+export function verifyPasswordReset(email, code) {
+  return apiPost("/auth/password-reset/verify", { email, code });
+}
+
+export function confirmPasswordReset(email, code, password, confirm) {
+  return apiPost("/auth/password-reset/confirm", {
+    email,
+    code,
+    password,
+    confirm,
   });
-  if (!r.ok) throw new Error((await r.json()).error || "Nepavyko pateikti");
-  return r.json();
 }

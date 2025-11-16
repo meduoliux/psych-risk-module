@@ -1,0 +1,140 @@
+/* client/src/components/pk-footer.css — COMPACT */
+
+/* ---- Hard override: full-bleed navy footer ---- */
+.pkf{
+  background:#0f2c56 !important;   /* PK navy */
+  color:#cfd7e6;
+  border-top:1px solid rgba(255,255,255,.06);
+  border-radius:0 !important;       /* jei kažkur paveldėjo radiusą */
+  box-shadow:none !important;       /* jei kas nors uždėjo šešėlį */
+}
+.pkf__inner{
+  width:min(1200px,100%);
+  margin:0 auto;
+  padding:14px 16px;
+}
+
+:root{
+  --pk-navy:#142238;
+  --pk-blue:#0a6cf1;
+  --pk-text:#305384;
+  --pk-muted:#6b7280;
+  --pk-border:#192743;
+  --pk-bg:#0f1b2e;
+  --pk-fg:#101826;
+  --pk-fg-muted:#51627e;
+}
+
+/* Pagrindas */
+.pkf{
+  background:var(--pk-bg);
+  color:var(--pk-fg);
+  border-top:1px solid rgba(163, 37, 37, 0.06);
+  font-size:13px;                    /* mažesnis šriftas */
+  line-height:1.3;
+}
+
+/* Vidus – kompaktiški tarpai */
+.pkf__inner{
+  width:min(1200px,100%);
+  margin:0 auto;
+  padding:14px 16px;                 /* buvo 24px —> 14px */
+  display:flex;
+  gap:16px;                          /* buvo 24px —> 16px */
+}
+
+/* Kairė kolona */
+.pkf__col{
+  flex:1 1 420px;
+  min-width:260px;
+}
+
+/* Brand */
+.pkf__brand{
+  display:flex;
+  align-items:center;
+  gap:8px;                           /* buvo 12px —> 8px */
+  margin-bottom:6px;                 /* buvo 8px —> 6px */
+}
+.pkf__logo{ display:block; height:22px; width:auto; } /* buvo 28px —> 22px */
+.pkf__brand-text{
+  font-weight:800;
+  letter-spacing:.3px;
+  color:#e9efff;
+  font-size:14px;                    /* buvo 22px —> 14px */
+}
+
+/* Aprašymas */
+.pkf__desc{
+  margin:2px 0 8px;                  /* buvo 12px —> 8px */
+  color:var(--pk-fg-muted);
+  font-size:12.5px;
+}
+
+/* Kontaktai — HORIZONTALŪS, bet kompaktiški */
+.pkf__contacts{
+  display:flex;
+  align-items:center;
+  gap:8px;                           /* buvo 12px —> 8px */
+  flex-wrap:wrap;
+  margin-top:4px;                    /* buvo 8px —> 4px */
+}
+.pkf__contact{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;                           /* buvo 8px —> 6px */
+  color:#d9e5ff;
+  text-decoration:none;
+  padding:6px 10px;                  /* buvo 8x12 —> 6x10 */
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:8px;                 /* buvo 10px —> 8px */
+  transition:background .15s ease, border-color .15s ease, color .15s ease;
+  font-size:12.5px;
+}
+.pkf__contact:hover{
+  background:rgba(255,255,255,.06);
+  border-color:rgba(255,255,255,.22);
+  color:#240808;
+}
+.pkf__ic{
+  display:inline-flex;
+  width:16px; height:16px;           /* buvo 18 —> 16 */
+  align-items:center; justify-content:center;
+}
+
+/* Apatinė juosta — dar kompaktiškiau */
+.pkf__bottom{
+  border-top:1px solid rgba(255,255,255,.06);
+  margin-top:6px;                    /* buvo 8px —> 6px */
+}
+.pkf__bottom-inner{
+  width:min(1200px,100%);
+  margin:0 auto;
+  padding:8px 16px 10px;             /* buvo 12/18 —> 8/10 */
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;                          /* buvo 16 —> 12 */
+  color:#9fb0cc;
+  font-size:12.5px;
+}
+.pkf__badges{
+  display:flex;
+  align-items:center;
+  gap:8px;                           /* buvo 10 —> 8 */
+}
+
+/* Maži ekranai — be didelių tarpų */
+@media (max-width: 720px){
+  .pkf__inner{
+    flex-direction:column;
+    gap:12px;                        /* buvo 16 —> 12 */
+    padding:12px;                    /* dar mažiau kraštuose */
+  }
+  .pkf__bottom-inner{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:6px;                         /* buvo 8 —> 6 */
+    padding:8px 12px 10px;
+  }
+}

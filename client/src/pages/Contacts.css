@@ -1,0 +1,175 @@
+:root{
+  --pk-navy:#142238;
+  --pk-navy-2:#182A46;
+  --pk-blue:#0a6cf1;
+  --pk-bg:#f7f8fb;
+  --pk-text:#1f2937;
+  --pk-muted:#6b7280;
+  --pk-border:#e5e7eb;
+  --pk-radius:12px;
+  --pk-shadow:0 10px 30px rgba(2,6,23,.06);
+}
+
+/* viršuje mažiau „oro“ nei login */
+.pk-main--top{
+  align-items: stretch;
+  padding: 24px 0 64px;
+}
+
+/* hero */
+.pk-hero{
+  background:#fff;
+  border:1px solid var(--pk-border);
+  border-radius: var(--pk-radius);
+  box-shadow: var(--pk-shadow);
+  padding:18px 20px;
+  margin-bottom:16px;
+}
+.pk-hero__title{
+  margin:0 0 4px;
+  color:var(--pk-navy);
+  font-size:22px;
+  font-weight:800;
+}
+.pk-hero__subtitle{
+  margin:0;
+  color:var(--pk-muted);
+  font-size:14px;
+}
+
+/* grid'ai */
+.pk-grid{
+  display:grid;
+  gap:12px;
+  margin-bottom:16px;
+}
+.pk-grid--3{ grid-template-columns: repeat(3, 1fr); }
+.pk-grid--2{ grid-template-columns: repeat(2, 1fr); }
+
+@media (max-width: 960px){
+  .pk-grid--3{ grid-template-columns: 1fr; }
+}
+@media (max-width: 720px){
+  .pk-grid--2{ grid-template-columns: 1fr; }
+}
+
+/* kortelės */
+.pk-card{
+  background:#fff;
+  border:1px solid var(--pk-border);
+  border-radius: var(--pk-radius);
+  box-shadow: var(--pk-shadow);
+  padding:14px;
+}
+.pk-card--hover{ transition: transform .08s ease, box-shadow .2s ease; }
+.pk-card--hover:hover{ transform: translateY(-1px); }
+.pk-card--wide{
+  padding:16px 18px;
+  margin-top:12px;
+}
+
+.pk-card__title{
+  margin:0 0 8px;
+  font-size:18px;
+  font-weight:800;
+  color:var(--pk-navy);
+}
+
+.pk-card__row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.pk-card__content{ display:flex; flex-direction:column; gap:2px; }
+.pk-card__title-sm{ font-weight:700; color:var(--pk-navy); }
+.pk-card__value{ font-size:16px; font-weight:700; }
+
+/* ikonų kapsulė */
+.pk-ic{
+  width:44px; height:44px;
+  border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  color:#0a6cf1;
+  background:#eef4ff;
+  border:1px solid #e3ebff;
+}
+.pk-ic--sm{
+  width:36px; height:36px;
+  border-radius:9px;
+  color:#0a6cf1;
+  background:#eef4ff;
+  border:1px solid #e3ebff;
+}
+
+/* help blokai */
+.pk-help{
+  background:#fff;
+  border:1px solid var(--pk-border);
+  border-radius:10px;
+  padding:14px;
+}
+.pk-help__head{
+  display:flex; align-items:center; gap:10px; margin-bottom:8px;
+}
+.pk-help__title{
+  font-weight:800; color:var(--pk-navy);
+}
+.pk-help__list{
+  margin:0 0 10px 20px; padding:0; color:var(--pk-text);
+}
+.pk-help__list li{ margin:2px 0; }
+
+/* formos */
+.pk-form{ margin-top:8px; }
+.pk-form--contact .pk-label{
+  display:block; font-weight:700; color:var(--pk-navy); margin-bottom:6px;
+}
+.pk-field{ display:flex; flex-direction:column; gap:6px; }
+.pk-input{
+  width:100%;
+  padding:10px 12px;
+  border:1px solid var(--pk-border);
+  border-radius:10px;
+  background:#fff; outline:none;
+  transition:border-color .15s, box-shadow .15s;
+  color:var(--pk-text);
+}
+.pk-input:focus{
+  border-color:#c7d2fe;
+  box-shadow:0 0 0 4px rgba(10,108,241,.08);
+}
+.pk-input--area{
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* mygtukai */
+.pk-actions{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+.pk-actions--right{ justify-content:flex-end; }
+
+.pk-btn{
+  padding:10px 14px; border-radius:10px; border:1px solid transparent;
+  background:#e2e8f0; color:#0f172a; cursor:pointer; font-weight:700;
+  transition: background .15s, border-color .15s, color .15s, transform .03s;
+}
+.pk-btn:active{ transform: translateY(1px); }
+.pk-btn--primary{ background:var(--pk-blue); color:#fff; border-color:var(--pk-blue); }
+.pk-btn--ghost{ background:#fff; color:#334155; border:1px solid #cbd5e1; }
+.pk-link{ color:var(--pk-blue); text-decoration:none; }
+.pk-link:hover{ text-decoration:underline; }
+
+/* utility */
+.pk-row{ display:flex; align-items:center; gap:12px; }
+.pk-muted{ color:var(--pk-muted); }
+
+/* 👇 įdėk pačiame Contacts.css FAILE APAČIOJE */
+textarea.pk-input,
+.pk-input--area {
+  display: block;
+  height: auto !important;
+  min-height: 120px;
+  line-height: 1.4 !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  resize: vertical;
+}

@@ -1,0 +1,727 @@
+/* ===== Paskolų klubo – Admin (tabs + grafikai + puslapiavimas) ===== */
+
+:root{
+  --pk-navy:#142238;
+  --pk-blue:#0a6cf1;
+  --pk-border:#e5e7eb;
+  --pk-bg:#f7f8fb;
+  --pk-text:#1f2937;
+  --pk-muted:#6b7280;
+  --pk-radius:12px;
+  --pk-shadow:0 8px 24px rgba(2,6,23,.06);
+}
+
+/* Bazė */
+html,body{margin:0;padding:0;background:var(--pk-bg);color:var(--pk-text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;}
+.pk-container{max-width:1200px;margin:24px auto;padding:0 16px;}
+.pk-page-title{margin:0 0 16px;font-weight:700;font-size:24px;color:var(--pk-navy);}
+
+/* Tabs */
+.pk-tabs{display:flex;gap:8px;margin-bottom:16px;}
+.pk-tab{
+  padding:10px 14px;border:1px solid var(--pk-border);background:#fff;border-radius:10px;
+  cursor:pointer;font-weight:600;transition:background .15s, box-shadow .15s, color .15s;
+}
+.pk-tab:hover{background:#f8fafc;}
+.pk-tab.is-active{color:#fff;background:var(--pk-blue);border-color:var(--pk-blue);box-shadow:0 0 0 3px rgba(10,108,241,.12);}
+
+/* Kortelės ir formos */
+.pk-card{border:1px solid var(--pk-border);border-radius:var(--pk-radius);padding:16px;background:#fff;box-shadow:var(--pk-shadow);}
+.pk-card__title{margin:0 0 12px;font-size:18px;font-weight:700;color:var(--pk-navy);}
+.pk-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.pk-grow{flex:1;}
+.pk-space-28{height:28px;}
+.pk-mt-16{margin-top:16px;}
+.pk-mt-10{margin-top:10px;}
+.pk-ml-8{margin-left:8px;}
+.pk-msg{margin-top:10px;color:var(--pk-muted);}
+
+/* Gridai */
+.pk-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.pk-grid-4{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:10px;}
+.pk-grid-5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;}
+.pk-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.pk-grid-2.pk-gap-6{gap:6px;}
+
+/* Laukai */
+.pk-field{display:flex;flex-direction:column;gap:6px;}
+.pk-input{width:100%;padding:10px 12px;border:1px solid var(--pk-border);border-radius:8px;background:#fff;outline:none;transition:box-shadow .15s,border-color .15s;font-size:14px;min-height:40px;}
+.pk-input:focus{border-color:#94a3b8;box-shadow:0 0 0 3px rgba(10,108,241,.12);}
+.pk-check{display:inline-flex;align-items:center;gap:8px;margin-top:8px;}
+.pk-inline-check{display:inline-flex;align-items:center;gap:6px;}
+.pk-muted{color:var(--pk-muted);}
+
+/* Mygtukai */
+.pk-btn{padding:10px 14px;border-radius:8px;border:1px solid transparent;background:#e2e8f0;color:#0f172a;cursor:pointer;font-size:14px;min-height:40px;transition:background .15s,border-color .15s,color .15s,box-shadow .15s,filter .15s;}
+.pk-btn--w{width:100%;}
+.pk-btn:disabled{opacity:.6;cursor:not-allowed;}
+.pk-btn--primary{background:var(--pk-blue);color:#fff;border-color:var(--pk-blue);}
+.pk-btn--primary:hover:not(:disabled){filter:brightness(.95);}
+.pk-btn--ghost{background:#fff;border-color:#cbd5e1;color:var(--pk-text);}
+.pk-btn--ghost:hover:not(:disabled){background:#f8fafc;}
+.pk-btn--danger{background:#fff;border-color:#ef4444;color:#ef4444;}
+.pk-btn--danger:hover:not(:disabled){background:#fef2f2;}
+
+/* Lentelės */
+.pk-table-wrap{width:100%;overflow-x:auto;border:1px solid var(--pk-border);border-radius:8px;background:#fff;}
+.pk-table{width:100%;border-collapse:collapse;font-size:14px;}
+.pk-table thead th{text-align:left;padding:10px 8px;font-weight:600;border-bottom:1px solid var(--pk-border);background:#f8fafc;white-space:nowrap;}
+.pk-table tbody td{padding:10px 8px;border-bottom:1px solid #f1f5f9;}
+
+/* Puslapiavimas */
+.pk-pagination{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px;}
+.pk-page-btn{padding:8px 12px;border:1px solid #cbd5e1;background:#fff;border-radius:8px;cursor:pointer;}
+.pk-page-btn:disabled{opacity:.5;cursor:not-allowed;}
+.pk-page-info{min-width:60px;text-align:center;}
+
+/* Santraukų blokai (juostų grafikai) */
+.pk-summary{border:1px solid var(--pk-border);border-radius:10px;padding:12px;background:#fff;}
+.pk-summary__title{font-weight:700;margin-bottom:8px;color:var(--pk-navy);}
+.pk-bar-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;margin:8px 0;}
+.pk-bar-label{width:18px;text-align:center;font-weight:700;}
+.pk-bar{height:12px;background:#eef2f7;border-radius:999px;overflow:hidden;}
+.pk-bar > span{display:block;height:100%;background:var(--pk-blue);}
+
+/* Nuorodos */
+.pk-link{color:var(--pk-blue);text-decoration:none;transition:color .2s;}
+.pk-link:hover{color:#084fc4;text-decoration:underline;}
+
+/* Modalas */
+.pk-modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.35);display:flex;align-items:center;justify-content:center;padding:16px;z-index:1000;}
+.pk-modal{width:min(900px,100%);max-height:90vh;background:#fff;border-radius:12px;padding:16px;box-shadow:0 20px 50px rgba(2,6,23,.25);overflow:hidden;}
+.pk-meta{display:grid;gap:6px;margin-bottom:12px;}
+
+/* Responsive */
+@media (max-width:900px){ .pk-grid-3{grid-template-columns:1fr;} }
+@media (max-width:640px){
+  .pk-container{padding:0 12px;}
+  .pk-page-title{font-size:20px;}
+  .pk-grid-2{grid-template-columns:1fr;}
+  .pk-grid-4{grid-template-columns:1fr;}
+  .pk-grid-5{grid-template-columns:1fr;}
+}
+
+/* tarpas tarp mygtuko (formos) ir lentelės */
+.pk-form {
+  margin-bottom: 16px;  /* arba 24px jei nori daugiau */
+}
+
+/* eilutė su mygtukais: tarpai ir tvarkingas išdėstymas */
+.pk-actions {
+  display: flex;
+  gap: 8px;           /* tarpas tarp mygtukų */
+  align-items: center;
+  flex-wrap: wrap;    /* jei siauros ekranuose – nelūžta negražiai */
+}
+
+/* kad būtų vienods "dydžio" (aukštis ir minimalus plotis) */
+.pk-btn--equal {
+  min-width: 140px;   /* pasireguliuok 120–160px pagal poreikį */
+  height: 36px;
+  padding: 0 14px;    /* kad tekstas neprišliptų prie kraštų */
+}
+
+/* Grąžinam rėmelį tik "Ištrinti" (danger) mygtukui */
+.pk-btn--danger {
+  border: 1px solid var(--danger-600, #DC2626) !important; /* raudona riba */
+}
+
+/* Hover – raudonas fonas, balti tekstai, riba tamsesnė */
+.pk-btn--danger:hover {
+  background: var(--danger-600, #DC2626);
+  color: #8d1010;
+  border-color: var(--danger-700, #B91C1C) !important;
+}
+
+/* Focus – subtilus žiedas (jei nori) */
+.pk-btn--danger:focus-visible {
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2) !important;
+  outline: none;
+}
+
+/* ===== Klausimų lentelės eilučių spalvinimas (pastelės) ===== */
+.pk-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+/* Ciklas per 8 spalvas */
+.pk-table tbody tr:nth-child(8n + 1) { background: #FFF7ED; } /* persikinė */
+.pk-table tbody tr:nth-child(8n + 2) { background: #F0F9FF; } /* šviesiai mėlyna */
+.pk-table tbody tr:nth-child(8n + 3) { background: #F0FFF4; } /* šviesiai žalia */
+.pk-table tbody tr:nth-child(8n + 4) { background: #FDF2F8; } /* rožinė */
+.pk-table tbody tr:nth-child(8n + 5) { background: #FAFAF5; } /* dramblio kaulas */
+.pk-table tbody tr:nth-child(8n + 6) { background: #F5F3FF; } /* levandų */
+.pk-table tbody tr:nth-child(8n + 7) { background: #F0FDF4; } /* mėtų */
+.pk-table tbody tr:nth-child(8n + 8) { background: #EEF2FF; } /* periwinkle */
+
+/* Hover – šiek tiek paryškinti, bet palikti pastelinį jausmą */
+.pk-table tbody tr:hover {
+  filter: brightness(0.98);
+}
+
+/* Kai redaguojama eilutė – subtilus rėmelis, kad matytųsi fokusas */
+.pk-table tbody tr:has(input.pk-input, select.pk-input) {
+  outline: 1px solid rgba(0,0,0,0.08);
+  outline-offset: -2px;
+}
+
+/* Jei nori, kad inputai neišmuštų fono – paliekam permatomą */
+.pk-table tbody tr input.pk-input,
+.pk-table tbody tr select.pk-input {
+  background: transparent;
+}
+
+/* -------- Klausimyno lentelės antraščių ir stulpelių lygiavimas -------- */
+.pk-table {
+  /* jei stulpeliai ankšti, praplėsk bazinį plotį */
+  min-width: 1150px;
+}
+
+.pk-table thead th,
+.pk-table tbody td {
+  vertical-align: middle;
+  padding: 10px 12px;
+  /* bazinis lygiavimas – centras */
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Teksto stulpelis turi būti platesnis ir lygiuotas į kairę */
+.pk-table thead th:nth-child(2),
+.pk-table tbody td:nth-child(2) {
+  text-align: left;
+  white-space: normal;         /* leisk eilutėms laužytis, jei tekstas ilgas */
+  width: 36ch;                 /* patogi tekstinė „kolona“ */
+}
+
+/* Plotiai ir lygiavimai pagal esamą stulpelių tvarką:
+   1: ID | 2: Tekstas | 3: Eiliškumas | 4: Min žyma | 5: Max žyma
+   6: Red flag | 7: Kryptis | 8: Svoris | 9: Skalė | 10: RF | 11: Veiksmai */
+
+/* 1) ID – siauras */
+.pk-table thead th:nth-child(1),
+.pk-table tbody td:nth-child(1) { width: 64px; }
+
+/* 3) Eiliškumas – siauras skaičius */
+.pk-table thead th:nth-child(3),
+.pk-table tbody td:nth-child(3) { width: 120px; }
+
+/* 4–5) Min/Max žymos – po ~180px */
+.pk-table thead th:nth-child(4),
+.pk-table tbody td:nth-child(4),
+.pk-table thead th:nth-child(5),
+.pk-table tbody td:nth-child(5) { width: 180px; }
+
+/* 6) Red flag – centras */
+.pk-table thead th:nth-child(6),
+.pk-table tbody td:nth-child(6) { width: 110px; }
+
+/* 7) Kryptis */
+.pk-table thead th:nth-child(7),
+.pk-table tbody td:nth-child(7) { width: 140px; }
+
+/* 8) Svoris (jei dar yra) */
+.pk-table thead th:nth-child(8),
+.pk-table tbody td:nth-child(8) { width: 110px; }
+
+/* 9) Skalė */
+.pk-table thead th:nth-child(9),
+.pk-table tbody td:nth-child(9) { width: 140px; }
+
+/* 10) RF */
+.pk-table thead th:nth-child(10),
+.pk-table tbody td:nth-child(10) { width: 100px; }
+
+/* 11) Veiksmai – mygtukai per flex su tarpu */
+.pk-table tbody td:nth-child(11) {
+  width: 200px;
+}
+.pk-table tbody td:nth-child(11) > * {
+  display: inline-flex;
+  gap: 8px;
+}
+
+/* Įvestys/select'ai – pilnas stulpelio plotis, kad gražiai centruotųsi su th */
+.pk-table tbody td input.pk-input,
+.pk-table tbody td select.pk-input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Checkbox “Red flag” – centruotas */
+.pk-table tbody td:nth-child(6) .pk-inline-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Antraščių tipografija, kad vizualiai „sueitų“ su turiniu */
+.pk-table thead th {
+  line-height: 1.2;
+}
+
+/* Kortos plėtinys per visą viewport'ą (full-bleed), kad netilpusi lenta sutilptų be horizontalaus scroll) */
+.pk-card--wide {
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  border-radius: 0;            /* optional: kad geriau „sueitų“ su kraštais */
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+@media (min-width: 1200px) {
+  .pk-card--wide {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+/* užtikrinam, kad lentelė neribotųsi kortos viduje */
+.pk-card--wide .pk-table-wrap {
+  overflow-x: visible;
+}
+
+/* Jei dar ankšta, gali praplėsti bazinį konteinerį (optional) */
+.pk-container {
+  max-width: 1400px; /* jei buvo mažiau — pvz., 1100–1200 */
+}
+/* Skaičių įvedimo laukai klausimų lentelėje – rodom aiškiai */
+.pk-table input[type="number"].pk-input {
+  width: 80px;            /* vietos užtenka skaičiui */
+  min-width: 80px;
+  text-align: center;
+  color: #0B1220;         /* tamsus tekstas */
+  background: #fff;       /* baltas fonas, kad nemaišytų eilutės spalvos */
+  position: relative;
+  z-index: 1;
+}
+
+/* Kad eilutės spalvos nepersidengtų su įvedimu */
+.pk-table td {
+  overflow: visible;
+}
+/* Užtikrinam, kad overlay pats neužrakintų slinkimo */
+.pk-modal-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* leisti slinkti ir overlay, jei modalas būtų aukštesnis */
+  overflow: auto;
+  max-height: 100vh;
+}
+
+/* Patiame modale – max aukštis ir slinkimas viduje */
+.pk-modal {
+  width: min(960px, 96vw);
+  max-height: 90vh;          /* svarbu: ribojam aukštį */
+  overflow-y: auto;          /* ir leidžiam scroll viduje */
+  -webkit-overflow-scrolling: touch; /* sklandus scroll iOS */
+  overscroll-behavior: contain;
+}
+
+/* Jei viduje yra ilga lentelė – ji irgi gali turėti savo scroll */
+.pk-modal .pk-table-wrap {
+  max-height: 70vh;
+  overflow: auto;
+}
+
+/* ===== Compact overrides – kad tilptų be horiz. scroll ===== */
+.pk-table {
+  table-layout: auto !important;
+  min-width: 0 !important;          /* NUIMAM 1150px/1000px min-width */
+  width: 100%;
+}
+
+.pk-card--dense .pk-table {
+  font-size: 13px;
+}
+.pk-card--dense .pk-table thead th,
+.pk-card--dense .pk-table tbody td {
+  padding: 6px 8px;                 /* mažesni tarpai */
+}
+
+/* Stulpelių pločiai – dar susiaurinti */
+.pk-table thead th:nth-child(1),
+.pk-table tbody td:nth-child(1){ width: 48px; }   /* ID */
+
+.pk-table thead th:nth-child(3),
+.pk-table tbody td:nth-child(3){ width: 72px; }   /* Eiliškumas */
+
+.pk-table thead th:nth-child(4),
+.pk-table tbody td:nth-child(4){ width: 120px; }  /* Min žyma */
+
+.pk-table thead th:nth-child(5),
+.pk-table tbody td:nth-child(5){ width: 120px; }  /* Max žyma */
+
+.pk-table thead th:nth-child(6),
+.pk-table tbody td:nth-child(6){ width: 80px; }   /* Red flag */
+
+.pk-table thead th:nth-child(7),
+.pk-table tbody td:nth-child(7){ width: 100px; }  /* Kryptis */
+
+.pk-table thead th:nth-child(8),
+.pk-table tbody td:nth-child(8){ width: 110px; }  /* Skalė */
+
+.pk-table thead th:nth-child(9),
+.pk-table tbody td:nth-child(9){ width: 80px; }   /* RF */
+
+.pk-table tbody td:nth-child(10){ width: 160px; } /* Veiksmai */
+
+/* Teksto stulpelis – laužomas ir ribojamas, kad neplėstų lentelės */
+.pk-table thead th:nth-child(2),
+.pk-table tbody td:nth-child(2){
+  text-align: left;
+  white-space: normal;              /* leidžiam perkelti eilutę */
+  max-width: 36ch;                  /* ribojam plotį */
+  word-break: break-word;
+}
+
+/* Ilgų nuorodų stulpelyje – elipsės (jei yra rezultatų lentelė) */
+.pk-table td span {
+  display: inline-block;
+  max-width: 220px;                 /* prireikus sumažink/padidink */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+}
+
+/* Skaičių input’ai – siauri */
+.pk-table input[type="number"].pk-input{
+  width: 64px;
+  min-width: 64px;
+  text-align: center;
+}
+
+/* Padažninam „suspaudimą“ mažuose ekranuose */
+@media (max-width: 1280px){
+  .pk-card--dense .pk-table { font-size: 12.5px; }
+  .pk-card--dense .pk-table thead th,
+  .pk-card--dense .pk-table tbody td { padding: 5px 6px; }
+}
+
+/* ===== Klausimo redagavimo formos išlyginimas (Kryptis / Skalė / Red flag) ===== */
+
+
+
+/* Label ir input'ai vienodo aukščio */
+.pk-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--pk-navy);
+}
+
+.pk-input,
+.pk-check--block {
+  height: 44px;
+  min-height: 44px;
+  line-height: 44px;
+  box-sizing: border-box;
+}
+
+/* Red flag grupė – checkbox + RF skaičius vienoje linijoje */
+.pk-flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Checkbox – vizualiai kaip blokas */
+.pk-check--block {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 1px solid var(--pk-border);
+  border-radius: 8px;
+  background: #fff;
+}
+
+/* RF laukelio dėžutė su paaiškinimu po apačia */
+.rf-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120px;
+}
+
+.rf-box .pk-input {
+  width: 100%;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Apatinis aprašymas */
+.rf-box .pk-tip {
+  font-size: 12px;
+  margin-top: 4px;
+  color: var(--pk-muted);
+  text-align: center;
+}
+
+/* Tooltip stilius (optional) */
+.pk-tip {
+  font-size: 13px;
+  color: var(--pk-muted);
+  margin-top: 4px;
+}
+
+/* Mažesni ekranai – viskas eina vertikaliai */
+@media (max-width: 900px) {
+  .pk-form--q {
+    grid-template-columns: 1fr;
+  }
+  .pk-flex-between {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .rf-box {
+    width: 100%;
+    align-items: flex-start;
+  }
+}
+
+/* ------ 1) 3 kolonų eilė: lygiuojam į viršų ------ */
+.pk-row-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Kryptis | Skalė | Rizikos indikatorius */
+  gap: 16px;
+  align-items: start;                 /* <-- vietoj end */
+}
+
+/* ------ 2) Vienodas laukų aukštis + Safari fix ------ */
+input.pk-input,
+select.pk-input {
+  height: 44px;           /* fiksuotas aukštis */
+  line-height: 22px;      /* Safari: kad tekstas nenukirptas */
+  padding: 10px 12px;     /* išlaikom tavo paddingą */
+}
+
+.pk-input--num{ 
+  max-width: 96px; 
+  text-align: center; 
+}
+
+/* Apatinės pastabos (pk-tip) užima bent tiek, kad neiškraipytų eilučių */
+.pk-field .pk-tip{ 
+  min-height: 18px; 
+}
+
+/* ------ 3) RF blokas vienoje linijoje su centru ------ */
+.pk-flex-between{
+  display: flex;
+  align-items: center;   /* <-- centre vertikaliai */
+  gap: 12px;
+}
+
+.pk-check--block{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;                 /* toks pat kaip input */
+  padding: 0 12px;
+  border: 1px solid var(--pk-border);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.rf-box{
+  display: inline-flex;
+  align-items: center;          /* slenkstis ir jo label vienoj linijoj */
+  gap: 8px;
+}
+
+.rf-box .pk-input{
+  width: 90px;                  /* kompaktiškas skaičiaus laukas */
+  height: 44px;                 /* sulygintas aukštis */
+  text-align: center;
+}
+
+.rf-box .pk-tip{
+  margin: 0;
+  white-space: nowrap;          /* „RF slenkstis“ neperkeliamas į kitą eilutę */
+  font-size: 12px;
+  color: var(--pk-muted);
+}
+
+/* Mažesniems ekranams – stulpelius verčiam į vieną */
+@media (max-width: 900px){
+  .pk-row-grid{ grid-template-columns: 1fr; }
+  .rf-box .pk-input{ width: 100%; }
+}
+
+/* === Pagalbos "?" tooltip'as klausimyno viršuje === */
+.pk-help {
+  margin-left: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.9);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: help;
+  position: relative;
+  color: #64748b;
+  background: #f8fafc;
+}
+
+.pk-help:hover {
+  background: #e5edff;
+  color: #1d4ed8;
+  border-color: #93c5fd;
+}
+
+.pk-help-tooltip {
+  position: absolute;
+  left: 50%;
+  top: 120%;
+  transform: translateX(-50%) translateY(0);
+  background: #0b1120;
+  color: #e5e7eb;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: normal;
+  width: 260px;
+  max-width: 280px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 50;
+  transition: opacity 0.15s ease-out, transform 0.15s ease-out;
+}
+
+.pk-help-tooltip ul {
+  margin: 4px 0 0 16px;
+  padding: 0;
+}
+
+.pk-help-tooltip strong {
+  font-weight: 600;
+}
+
+.pk-help-tooltip em {
+  font-style: normal;
+  color: #a5b4fc;
+}
+
+.pk-help:hover .pk-help-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(6px);
+}
+
+.pk-help-tooltip::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0 6px 6px 6px;
+  border-style: solid;
+  border-color: transparent transparent #0b1120 transparent;
+}
+
+.pk-help-wrap {
+  position: relative;
+  display: inline-block;
+  margin-left: 8px;
+}
+
+.pk-help {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: help;
+  background: #f5f5f5;
+  color: #555;
+}
+
+/* tooltip langelis */
+.pk-help-tooltip {
+  position: absolute;
+  top: 130%;
+  right: 0;
+  z-index: 20;
+  max-width: 360px;
+  max-height: 260px;
+  padding: 10px 12px;
+  background: #192743;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(96, 125, 187, 0.18);
+  font-size: 12px;
+  line-height: 1.4;
+  color: #fefeff;
+
+  overflow-y: auto;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+/* svarbu: hover ant VISOS wrap zonos (ikona + tooltip) */
+.pk-help-wrap:hover .pk-help-tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+/* Krypties select – kad atrodytų kaip normalus baltas įvedimo laukas */
+/* Krypties select – toks pats rėmelis kaip kiti pk-input */
+select.pk-input {
+  background-color: #fff;
+  color: var(--pk-text);
+  border: 1px solid var(--pk-border);
+  border-radius: 8px;
+  padding: 10px 32px 10px 12px; /* vietos tekstui + rodyklei */
+  height: 44px;
+  line-height: 22px;
+  box-sizing: border-box;
+
+  -webkit-appearance: none;  /* nuimam Safari pilką native stilių */
+  appearance: none;
+  outline: none;
+}
+
+/* Focus būsena – toks pats mėlynas “apvadas” kaip kitiems */
+select.pk-input:focus {
+  border-color: #94a3b8;
+  box-shadow: 0 0 0 3px rgba(10,108,241,.12);
+  outline: none;
+}
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main {
+  flex: 1 0 auto;
+}
+
+.app-footer {
+  margin-top: auto;
+  flex-shrink: 0;
+}

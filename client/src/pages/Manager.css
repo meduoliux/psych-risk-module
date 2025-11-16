@@ -1,0 +1,434 @@
+/* ---- Puslapio bazė ---- */
+.pk-manager {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color: #0f172a;
+}
+
+/* Konteineris – šiek tiek platesnis */
+.pk-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.pk-page-title {
+  margin: 0 0 16px;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+/* Tarpai / utils */
+.pk-mb-20 { margin-bottom: 20px; }
+.pk-mt-12 { margin-top: 12px; }
+.pk-msg { margin-top: 10px; }
+.pk-grow { flex: 1; }
+
+/* Eilutės */
+.pk-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+/* paieškos eilutė, kad gražiai susispaustų mažesniuose ekranuose */
+.pk-row--search {
+  flex-wrap: wrap;
+}
+
+/* paieškos inputui šiek tiek fiksuoto pločio desktop'e */
+.pk-search-input {
+  min-width: 260px;
+  max-width: 360px;
+}
+
+/* Kortelės */
+.pk-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.06);
+}
+.pk-card__title {
+  margin: 0 0 12px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Gridai */
+.pk-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.pk-gap-10 { gap: 10px; }
+
+/* Laukai */
+.pk-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+  outline: none;
+  transition: box-shadow .15s, border-color .15s;
+  font-size: 14px;
+  min-height: 40px;
+}
+.pk-input:focus {
+  border-color: #94a3b8;
+  box-shadow: 0 0 0 3px rgba(10,108,241,.12);
+}
+
+/* Mygtukai */
+.pk-btn {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: #fff;
+  color: #0f172a;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  min-height: 40px;
+  transition: background .15s, border-color .15s, color .15s, box-shadow .15s, filter .15s;
+}
+.pk-btn:disabled { opacity: .6; cursor: not-allowed; }
+
+.pk-btn--primary {
+  background: #0a6cf1;
+  color: #fff;
+  border-color: #0a6cf1;
+}
+.pk-btn--primary:hover:not(:disabled) { filter: brightness(.96); }
+
+.pk-btn--ghost {
+  background: #fff;
+  border-color: #cbd5e1;
+}
+.pk-btn--ghost:hover:not(:disabled) { background: #f8fafc; }
+
+/* Lentelė */
+.pk-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+/* fiksuotas layout, kad stulpeliai gražiau išsilygintų */
+.pk-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  table-layout: fixed;
+}
+
+.pk-table thead th {
+  text-align: left;
+  padding: 10px 8px;
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f8fafc;
+  white-space: nowrap;
+}
+.pk-table tbody td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: top;
+}
+
+/* stulpelių pločiai */
+.pk-col-client  { width: 14%; }
+.pk-col-email   { width: 16%; }
+.pk-col-code    { width: 11%; }
+.pk-col-date    { width: 13%; }
+.pk-col-status  { width: 9%; }
+.pk-col-score   { width: 7%; }
+.pk-col-url     { width: 18%; }
+.pk-col-actions { width: 12%; }
+
+/* Nuorodos stulpelis – kad nerodytų "..." ir būtų visas URL (gali kristi į kelias eilutes) */
+.pk-url-cell a {
+  display: inline-block;
+  white-space: normal;
+  word-break: break-all;
+  font-size: 12px;
+  color: #0a6cf1;
+  text-decoration: none;
+}
+.pk-url-cell a:hover {
+  text-decoration: underline;
+}
+
+/* Nuorodos */
+.pk-link { color: #0a6cf1; text-decoration: none; }
+.pk-link:hover { text-decoration: underline; }
+
+/* Modalas */
+.pk-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 1000;
+}
+.pk-modal {
+  width: min(900px, 100%);
+  max-height: 90vh;
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 20px 50px rgba(2, 6, 23, 0.25);
+  overflow: hidden;
+}
+
+/* Meta info blokas modalui */
+.pk-meta { display: grid; gap: 6px; margin-bottom: 12px; }
+
+/* Klaidos */
+.pk-error { color: #dc2626; }
+
+.pk-muted { color: #6b7280; }
+
+/* Žinutė po lentelės, kai nukopijuota nuoroda */
+.pk-copy-msg {
+  font-size: 13px;
+  color: #0a6cf1;
+}
+
+/* Nuorodos kopijavimo "mygtukas" lentelėje */
+.pk-url-copy {
+  display: inline-block;
+  white-space: normal;
+  word-break: break-all;
+  font-size: 12px;
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  color: #0a6cf1;
+  cursor: pointer;
+  text-align: left;
+}
+.pk-url-copy:hover {
+  text-decoration: underline;
+}
+
+/* Puslapiavimas */
+.pk-pagination {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.pk-page-btn {
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px;
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.pk-page-btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.pk-page-info {
+  font-size: 14px;
+  color: #475569;
+}
+/* Maži mygtukai (CSV / PDF) */
+.pk-btn--sm {
+  padding: 6px 10px;
+  min-height: 32px;
+  font-size: 13px;
+}
+
+/* Eksporto mygtukų grupė prie paieškos */
+.pk-export-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 8px;
+  flex-wrap: wrap;
+}
+
+/* Maži mygtukai (CSV / PDF) */
+.pk-btn--sm {
+  padding: 6px 6px;
+  min-height: 32px;
+  font-size: 13px;
+}
+
+/* Mygtukai su ikona */
+.pk-btn--icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Ikonėlės mygtukuose */
+.pk-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+/* Eksporto mygtukų grupė prie paieškos */
+.pk-export-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 8px;
+  flex-wrap: wrap;
+}
+
+/* Paieškos eilutė – kairėje pavadinimas, dešinėje visa valdymo juosta */
+.pk-row--search {
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Dešinė paieškos + mygtukų pusė */
+.pk-row-search-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+/* Paieškos inputas – plečiasi, bet nelipa per daug */
+.pk-search-input {
+  flex: 1 1 220px;
+  max-width: 360px;
+}
+
+/* Maži mygtukai (CSV/PDF) */
+.pk-btn--sm {
+  padding: 5px 8px;
+  min-height: 30px;
+  font-size: 12px;
+}
+
+/* Mygtukai su ikona */
+.pk-btn--icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* Ikonėlės wrapperis */
+.pk-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+/* Eksporto grupė – maža „piliulė“ */
+.pk-export-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 4px;
+  border-radius: 9999px;
+  border: 1px solid #e5e7eb;
+  background: #f8fafc;
+}
+
+/* Paieškos eilutė – visas blokas */
+.pk-row--search {
+  margin-bottom: 12px;
+}
+
+/* Vidinis blokas: Paieška + input + mygtukai vienoje eilėje */
+.pk-row-search-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Antraštė „Paieška“ – mažesnis tarpas dešinėje */
+.pk-search-title {
+  margin: 0;
+  font-size: 16px;
+}
+
+/* Paieškos inputas – išsiplečia, bet stovi iškart po „Paieška“ */
+.pk-search-input {
+  flex: 1 1 220px;
+  max-width: 360px;
+}
+
+/* Eksporto grupė kaip anksčiau */
+.pk-export-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 4px;
+  border-radius: 9999px;
+  border: 1px solid #e5e7eb;
+  background: #f8fafc;
+}
+
+/* Paieškos eilutė: kairė + dešinė pusė */
+.pk-row--search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Kairė: „Paieška“ + inputas šalia */
+.pk-row-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 260px;
+}
+
+/* Dešinė: mygtukai */
+.pk-row-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Antraštė „Paieška“ – be didelio tarpo */
+.pk-search-title {
+  margin: 0;
+  font-size: 16px;
+}
+
+/* Paieškos laukelis prilipęs prie pavadinimo */
+.pk-search-input {
+  flex: 1 1 220px;
+  max-width: 360px;
+}
+
+.pk-refresh-btn {
+  padding: 4px 4px;     /* mažesni vidiniai tarpai */
+  font-size: 13px;       /* šriftas mažesnis */
+  height: 32px;          /* mažas aukštis */
+  line-height: 1;
+  border-radius: 6px;    /* mažesnis, kompaktiškesnis */
+}

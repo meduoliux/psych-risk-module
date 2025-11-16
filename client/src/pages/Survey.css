@@ -1,0 +1,228 @@
+/* Bendras konteineris */
+.sv-container {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* Kortelė */
+.sv-card {
+  background: #fff;
+  border: 1px solid #e6e8ee;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(10, 30, 66, 0.05);
+}
+
+/* Antraštės */
+.sv-title {
+  margin: 0 0 6px;
+  font-size: 24px;
+  line-height: 1.2;
+  color: #0b1220;
+}
+.sv-subtitle {
+  margin: 0 0 18px;
+  color: #546173;
+  font-size: 14px;
+}
+
+/* Įspėjimai */
+.sv-alert {
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+.sv-alert--error {
+  background: #ffe6e6;
+  border: 1px solid #f3b3b3;
+  color: #8b1b1b;
+}
+
+/* Klausimo kortelė */
+.sv-qcard {
+  border: 1px solid #e6e8ee;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 12px;
+  transition: border-color .2s ease, box-shadow .2s ease;
+  background: #fafbff;
+}
+.sv-qcard:hover {
+  border-color: #cfd5e3;
+  box-shadow: 0 1px 8px rgba(10, 30, 66, 0.04);
+}
+.sv-qcard.has-error {
+  border-color: #e53e3e;
+  background: #fffafa;
+}
+
+/* Klausimo antraštė (numeris + tekstas) */
+.sv-qhead {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.sv-qnum {
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #eef2ff;
+  color: #1f3a8a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+.sv-qtext {
+  font-weight: 600;
+  color: #0b1220;
+  line-height: 1.35;
+}
+.sv-flag {
+  margin-left: 6px;
+}
+
+/* Skalės eilutė */
+.sv-scale {
+  display: grid;
+  grid-template-columns: 120px 1fr 120px;
+  align-items: center;
+  gap: 12px;
+}
+.sv-scale-label {
+  font-size: 13px;
+  color: #606f85;
+}
+.sv-scale-label--left { text-align: left; }
+.sv-scale-label--right { text-align: right; }
+
+
+/* Min / Max žymos */
+.sv-scale-label {
+  min-width: 120px;
+  color: #667085;
+  line-height: 1.2;
+  text-align: center;        /* <-- centras */
+}
+
+/* Skaičių pasirinkimai */
+.sv-scale-options {
+  display: flex;
+  align-items: center;
+  justify-content: center;   /* <-- centras */
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+
+/* Kiekvienas skaičiukas */
+.sv-scale-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+}
+.sv-scale-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+}
+.sv-scale-bullet {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid #cfd5e3;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #0b1220;
+  cursor: pointer;
+  transition: all .15s ease;
+  background: #ffffff;
+}
+.sv-scale-option input[type="radio"]:checked + .sv-scale-bullet {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .15);
+}
+
+/* Lauko klaida */
+.sv-field-error {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #b42318;
+}
+
+/* Privatumo sutikimas */
+.sv-consent {
+  margin: 18px 0 8px;
+}
+.sv-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #0b1220;
+}
+.sv-check a {
+  color: #0a6cf1;
+  text-decoration: none;
+}
+.sv-check a:hover {
+  text-decoration: underline;
+}
+
+/* Veiksmų juosta */
+.sv-actions {
+  margin-top: 14px;
+}
+.sv-submit {
+  padding: 10px 18px;
+  background: #0a6cf1;
+  color: #fff;
+  border: 1px solid #0a6cf1;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: filter .15s ease, transform .02s ease;
+}
+.sv-submit:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+.sv-submit:active {
+  transform: translateY(1px);
+}
+
+/* Būsenos */
+.sv-loading,
+.sv-error {
+  background: #fff;
+  border: 1px solid #e6e8ee;
+  border-radius: 10px;
+  padding: 16px;
+  color: #0b1220;
+}
+
+/* Maži ekranai */
+@media (max-width: 640px) {
+  .sv-scale {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .sv-scale-label--left,
+  .sv-scale-label--right {
+    text-align: left;
+  }
+}
+
+@keyframes sv-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
